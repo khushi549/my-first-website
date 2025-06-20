@@ -7,6 +7,12 @@ body{
 
 h1{
     color:aquamarine;
+    transition: color 0.5s, letter-spacing 0.5s;
+}
+
+h1:hover {
+    color: orange;
+    letter-spacing: 2px;
 }
 
 button{
@@ -22,4 +28,192 @@ button{
 
 button:hover{
     background-color:darkgreen;
+}
+
+#main-img {
+    width: 250px;
+    border-radius: 15px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.4s;
+}
+
+#main-img:hover {
+    transform: scale(1.08) rotate(360deg);
+}
+
+#learning-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 300px;
+}
+
+#learning-list li {
+    background: #e0f7fa;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: background 0.3s;
+}
+
+#learning-list li:hover {
+    background: #b2ebf2;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    #main-img {
+        width: 100%;
+        max-width: 95vw;
+    }
+    #learning-list li {
+        font-size: 16px;
+    }
+}
+
+#moodboard {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+.mood-section {
+    margin-bottom: 32px;
+}
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 18px;
+    margin-top: 12px;
+}
+.mood-img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    transition: transform 0.4s, box-shadow 0.4s;
+    cursor: pointer;
+}
+.mood-img:hover {
+    transform: scale(1.15) rotate(2deg);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    z-index: 2;
+}
+.color-swatches {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+}
+.swatch {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    border: 2px solid #eee;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}
+.quotes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.quotes li {
+    background: #f8bbd0;
+    margin: 10px 0;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-style: italic;
+    color: #333;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+@media (max-width: 700px) {
+    #moodboard {
+        padding: 8px;
+    }
+    .image-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+    .swatch {
+        width: 32px;
+        height: 32px;
+    }
+    .quotes li {
+        font-size: 15px;
+    }
+}
+.mood-section button {
+    margin: 8px 0 12px 0;
+    padding: 7px 16px;
+    background: #b3e5fc;
+    color: #333;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.mood-section button:hover {
+    background: #81d4fa;
+}
+form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+form input[type="url"],
+form input[type="text"] {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    flex: 1 1 180px;
+}
+form input[type="color"] {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+    padding: 0;
+}
+form button[type="submit"] {
+    background: #c8e6c9;
+    color: #333;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+form button[type="submit"]:hover {
+    background: #81c784;
+}
+.album-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 12px;
+}
+.album-name {
+    background: #e1bee7;
+    color: #333;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 17px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    transition: background 0.3s, transform 0.3s;
+    cursor: pointer;
+}
+.album-name:hover {
+    background: #ce93d8;
+    transform: scale(1.07);
 }
