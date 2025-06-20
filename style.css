@@ -91,7 +91,7 @@ button:hover{
     padding: 20px;
     background: #fff;
     border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
     color: #333;
 }
 .mood-section {
@@ -276,4 +276,102 @@ h1:hover .flower3 {
 h1:hover .flower4 {
     opacity: 1;
     transform: translate(60px, 40px) scale(1.1) rotate(-10deg);
+}
+
+#pinterest-board {
+    column-count: 3;
+    column-gap: 1.5rem;
+    max-width: 1100px;
+    margin: 40px auto 30px auto;
+    padding: 0 10px;
+}
+@media (max-width: 900px) {
+    #pinterest-board { column-count: 2; }
+}
+@media (max-width: 600px) {
+    #pinterest-board { column-count: 1; }
+}
+.pinterest-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+    margin: 0 0 1.5rem 0;
+    display: inline-block;
+    width: 100%;
+    padding: 22px 18px 18px 18px;
+    break-inside: avoid;
+    position: relative;
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+.pinterest-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    transform: translateY(-6px) scale(1.03);
+}
+.pinterest-album {
+    background: #ffe0b2;
+    color: #333;
+    font-size: 1.15rem;
+    font-weight: bold;
+    border-left: 6px solid #f8bbd0;
+    border-radius: 12px;
+    padding: 12px 10px 12px 18px;
+    margin-bottom: 0;
+}
+.pinterest-color {
+    width: 100%;
+    height: 60px;
+    border-radius: 10px;
+    border: 2px solid #b2dfdb;
+    margin-bottom: 0;
+}
+.pinterest-quote {
+    background: #f8bbd0;
+    color: #333;
+    font-size: 1.08rem;
+    font-style: italic;
+    border-radius: 10px;
+    padding: 14px 12px;
+    margin-bottom: 0;
+}
+
+#controls-section {
+    max-width: 900px;
+    margin: 30px auto 10px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+    align-items: center;
+    justify-content: center;
+}
+#controls-section form {
+    display: flex;
+    gap: 8px;
+    margin: 0;
+}
+#controls-section input[type="text"] {
+    padding: 7px 12px;
+    border-radius: 6px;
+    border: 1px solid #64b5f6;
+    font-size: 15px;
+}
+#controls-section input[type="color"] {
+    width: 38px;
+    height: 38px;
+    border: 2px solid #f8bbd0;
+    border-radius: 6px;
+    background: none;
+    padding: 0;
+}
+#controls-section button {
+    background: #b2dfdb;
+    color: #333;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+#controls-section button:hover {
+    background: #f8bbd0;
 }

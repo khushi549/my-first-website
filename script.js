@@ -18,6 +18,18 @@ let albums = [
   'Enya - Watermark'
 ];
 
+// Colors
+const colorSwatches = document.getElementById('color-swatches');
+let colors = ['#006a4e', '#7b112c', '#3d1e6d', '#191970', '#232b2b'];
+
+// Quotes
+const quotesList = document.getElementById('quotes-list');
+let quotes = [
+  '"Music can change the world because it can change people." – Bono',
+  '"Where words fail, music speaks." – Hans Christian Andersen',
+  '"One good thing about music, when it hits you, you feel no pain." – Bob Marley'
+];
+
 // --- FIREBASE PERSISTENCE ---
 // These functions assume you have 'db' and 'auth' available from the module script.
 
@@ -56,13 +68,19 @@ window.addEventListener('firebase-auth', async (e) => {
       albums = data.albums || albums;
       colors = data.colors || colors;
       quotes = data.quotes || quotes;
-      renderAlbums();
-      renderColors();
-      renderQuotes();
     }
   }
+  renderAlbums();
+  renderColors();
+  renderQuotes();
 });
 
+// Initial render on page load
+renderAlbums();
+renderColors();
+renderQuotes();
+
+// Restore classic rendering for albums, colors, and quotes
 function renderAlbums() {
   albumGrid.innerHTML = '';
   albums.forEach((album, idx) => {
@@ -76,9 +94,7 @@ function renderAlbums() {
       input.value = album;
       input.className = 'album-edit-input';
       input.onblur = save;
-      input.onkeydown = function(e) {
-        if (e.key === 'Enter') input.blur();
-      };
+      input.onkeydown = function(e) { if (e.key === 'Enter') input.blur(); };
       div.replaceWith(input);
       input.focus();
       function save() {
@@ -88,6 +104,25 @@ function renderAlbums() {
       }
     };
     albumGrid.appendChild(div);
+  });
+  saveMoodBoard();
+}
+function renderColors() {
+  colorSwatches.innerHTML = '';
+  colors.forEach(color => {
+    const div = document.createElement('div');
+    div.className = 'swatch';
+    div.style.background = color;
+    colorSwatches.appendChild(div);
+  });
+  saveMoodBoard();
+}
+function renderQuotes() {
+  quotesList.innerHTML = '';
+  quotes.forEach(q => {
+    const li = document.createElement('li');
+    li.textContent = q;
+    quotesList.appendChild(li);
   });
   saveMoodBoard();
 }
@@ -104,20 +139,6 @@ document.getElementById('add-album-form').onsubmit = function(e) {
   this.reset();
   saveMoodBoard();
 };
-
-// Colors
-const colorSwatches = document.getElementById('color-swatches');
-let colors = ['#006a4e', '#7b112c', '#3d1e6d', '#191970', '#232b2b'];
-function renderColors() {
-  colorSwatches.innerHTML = '';
-  colors.forEach(color => {
-    const div = document.createElement('div');
-    div.className = 'swatch';
-    div.style.background = color;
-    colorSwatches.appendChild(div);
-  });
-  saveMoodBoard();
-}
 document.getElementById('shuffle-colors').onclick = function() {
   colors = colors.sort(() => Math.random() - 0.5);
   renderColors();
@@ -131,23 +152,6 @@ document.getElementById('add-color-form').onsubmit = function(e) {
   this.reset();
   saveMoodBoard();
 };
-
-// Quotes
-const quotesList = document.getElementById('quotes-list');
-let quotes = [
-  '"Music can change the world because it can change people." – Bono',
-  '"Where words fail, music speaks." – Hans Christian Andersen',
-  '"One good thing about music, when it hits you, you feel no pain." – Bob Marley'
-];
-function renderQuotes() {
-  quotesList.innerHTML = '';
-  quotes.forEach(q => {
-    const li = document.createElement('li');
-    li.textContent = q;
-    quotesList.appendChild(li);
-  });
-  saveMoodBoard();
-}
 document.getElementById('shuffle-quotes').onclick = function() {
   quotes = quotes.sort(() => Math.random() - 0.5);
   renderQuotes();
