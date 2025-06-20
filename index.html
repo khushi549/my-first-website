@@ -5,7 +5,20 @@
     <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h1>My Mood Board</h1>
+        <div id="auth-section">
+            <input type="email" id="email" placeholder="Email">
+            <input type="password" id="password" placeholder="Password">
+            <button id="login-btn">Login</button>
+            <button id="signup-btn">Sign Up</button>
+            <button id="logout-btn" style="display:none;">Logout</button>
+        </div>
+        <h1>
+            My Mood Board
+            <span class="flower flower1">🌸</span>
+            <span class="flower flower2">🌼</span>
+            <span class="flower flower3">🌺</span>
+            <span class="flower flower4">🌻</span>
+        </h1>
         <div id="moodboard">
             <div class="mood-section">
                 <h2>Albums</h2>
@@ -52,5 +65,75 @@
         </div>
         <button id="color-btn">Change Background</button>
         <script src="script.js"></script>
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+            import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+            import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+          
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+              apiKey: "AIzaSyDYUiH0XqKr3XUEsmL9V0q3qPW9pawfLP0",
+              authDomain: "mood-board-276d0.firebaseapp.com",
+              projectId: "mood-board-276d0",
+              storageBucket: "mood-board-276d0.firebasestorage.app",
+              messagingSenderId: "473465709704",
+              appId: "1:473465709704:web:4c8ad7cc572f8d29fdab3d"
+            };
+          
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
+            const auth = getAuth(app);
+
+            // Sign Up
+            document.getElementById('signup-btn').onclick = async function() {
+              const email = document.getElementById('email').value;
+              const password = document.getElementById('password').value;
+              try {
+                await createUserWithEmailAndPassword(auth, email, password);
+                alert('Sign up successful! You are now logged in.');
+              } catch (error) {
+                alert(error.message);
+              }
+            };
+
+            // Login
+            document.getElementById('login-btn').onclick = async function() {
+              const email = document.getElementById('email').value;
+              const password = document.getElementById('password').value;
+              try {
+                await signInWithEmailAndPassword(auth, email, password);
+              } catch (error) {
+                alert(error.message);
+              }
+            };
+
+            // Logout
+            document.getElementById('logout-btn').onclick = async function() {
+              await signOut(auth);
+            };
+
+            // Show/hide buttons based on auth state
+            onAuthStateChanged(auth, user => {
+              if (user) {
+                document.getElementById('login-btn').style.display = 'none';
+                document.getElementById('signup-btn').style.display = 'none';
+                document.getElementById('logout-btn').style.display = '';
+                // You can now load/save data for this user!
+              } else {
+                document.getElementById('login-btn').style.display = '';
+                document.getElementById('signup-btn').style.display = '';
+                document.getElementById('logout-btn').style.display = 'none';
+              }
+              // Expose db and auth to window for script.js
+              window.db = db;
+              window.auth = auth;
+              // Dispatch custom event for script.js to listen for auth state
+              window.dispatchEvent(new CustomEvent('firebase-auth', { detail: user }));
+            });
+        </script>
     </body>
     </html>
